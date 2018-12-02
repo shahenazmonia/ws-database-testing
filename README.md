@@ -116,20 +116,8 @@ tests, run `npm run test` in your terminal.
   at its default state. That's why before running every single test we have to
   rerun the script from `db_build.js` to restart the database.
 
-### 4. Connect with testing databas
 
-* A big projects maybe have different type of databas, database for development, database for production, and database for testing. To make sure you are running the testing databas, inside `db_build.js` we need to check that by:
-
-```js
-if ((process.env.NODE_END = "test")) {
-  //do something
-  // read test_db_bulid.js file
-} else {
-  //read db_build.js file
-}
-```
-
-### 5. Turn the db build script into a reusable function
+### 4. Turn the db build script into a reusable function
 
 * To make sure that any tests will be executed only after the database has been
   restarted we need the `runDbBuild` function in `db_build.js` to be a callback
@@ -144,7 +132,7 @@ const runDbBuild = cb => {
 };
 ```
 
-### 6. Write tests!
+### 5. Write tests!
 
 * In your `tests.js` require tape, runDbBuild function and queries that you are
   going to test:
@@ -176,8 +164,21 @@ tape('what you are going to test', (t)=> {
 })
 ```
 
-* Now it's time to experiment with writing your tests! :)
+* Right now you should write a test for `getData()` function that exists in `queries/getData.js`
 
+```js
+tape('get data method', (t)=>{
+  runDbBuild(function(err, res){
+    // create expected data
+    // handle the callback error and result, then make the test
+    })
+
+  })
+
+})
+```
+* Write a test for `postData()` function .
+ 
 
 ## Additional Info
 
