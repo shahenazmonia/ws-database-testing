@@ -155,17 +155,7 @@ tape("tape is working", t => {
 ```
 
 * You are ready to test database queries! Remember that before every test you
-  have to restart the test database by calling `runDbBuild` function:
-
-```js
-tape('what you are going to test', (t)=> {
-  runDbBuild(function(err, res){
-   your test goes here
-  })
-})
-```
-
-* Right now you should write a test for `getData()` function that exists in `queries/getData.js`
+  have to restart the test database by calling `runDbBuild` function. Now you should write a test for `getData()` function that exists in `queries/getData.js`
 
 ```js
 tape('get data method', (t)=>{
@@ -173,7 +163,6 @@ tape('get data method', (t)=>{
     // create expected data
     // handle the callback error and result, then make the test
     })
-
   })
 
 })
@@ -199,7 +188,7 @@ if (process.env.NODE_ENV === "test") {
 
  To do this our `db_build.js` file will need to check which sql script it needs to run.
 ```js
-if ((process.env.NODE_END = "test")) {
+if ((process.env.NODE_ENV = "test")) {
   sql = fs.readFileSync(`${__dirname}/test_db_build.sql`).toString();
 } else {
   sql = fs.readFileSync(`${__dirname}/db_build.sql`).toString();
