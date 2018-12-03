@@ -155,27 +155,40 @@ tape("tape is working", t => {
 ```
 
 * You are ready to test database queries! Remember that before every test you
-  have to restart the test database by calling `runDbBuild` function:
+  have to restart the test database by calling `runDbBuild` function. Now you should write a test for `getData()` function that exists in `queries/getData.js`
 
 ```js
-tape('what you are going to test', (t)=> {
+tape('get data method', (t)=>{
   runDbBuild(function(err, res){
-   your test goes here
+    // create expected data
+    // handle the callback error and result, then make the test
+    })
   })
+
 })
 ```
+* Write a test for `postData()` function .
 
-* Now it's time to experiment with writing your tests! :)
 
 ## Additional Info
 
-On larger projects we may want to have a `test_db_build.sql` so that we can have a range of fake data in our test database to test on. To do this our `db_build.js` will need to check which sql script it needs to run.
+On larger projects we may want to have a `test_db_build.sql` so that we can have a range of fake data in our test database to test on.
 
-One way in which you could implement this would be to add the following to your
-`db_build.js`:
-
+Original data should be exists in `db_build.js` file. To use it, you should create development database af first, then connect with development databas inside `db_connection.js` file.
 ```js
-if ((process.env.NODE_END = "test")) {
+if (process.env.NODE_ENV === "test") {
+  DB_URL = process.env.TEST_DB_URL;
+
+}else if (process.env.NODE_ENV === "development") {
+  DB_URL = process.env.DEVELOPMENT_DB_URL;
+}else {
+  // do something
+}
+```
+
+ To do this our `db_build.js` file will need to check which sql script it needs to run.
+```js
+if ((process.env.NODE_ENV = "test")) {
   sql = fs.readFileSync(`${__dirname}/test_db_build.sql`).toString();
 } else {
   sql = fs.readFileSync(`${__dirname}/db_build.sql`).toString();
