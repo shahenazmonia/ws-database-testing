@@ -195,9 +195,5 @@ if ((process.env.NODE_ENV = "test")) {
 }
 ```
 
-One way in which you could implement this would be to add the following to your
-`db_build.js`:
-
-
 This will specify which file to use based on whether it's in a test environment
 or not.
